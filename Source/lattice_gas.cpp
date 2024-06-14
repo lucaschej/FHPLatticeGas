@@ -85,6 +85,7 @@ int main(void)
     double Ni_the[7]; //Theoretical mean occupation numbers in equilibrium
 
     vector< vector<double> > rho (XMAX*64, vector<double>(YMAX)); //Density
+    //vector< vector<double> > rho (YMAX, vector<double>(YMAX)); //Density
     vector< vector<double> > u[2]; //Velocity
     double mean_data[NMEANDATA]; //Mean of Ni (0-6), rho (7), u (8-9) in all the space
     vector<double> ni_to_write[7]; //Used to write the Ni in every iteration
@@ -100,10 +101,12 @@ int main(void)
         cell[i] = vector< vector<uint64_t> >(XMAX, vector<uint64_t>(YMAX));
         result_cell[i] = vector< vector<uint64_t> >(XMAX, vector<uint64_t>(YMAX));
         Ni[i] = vector< vector<double> >(XMAX*64, vector<double>(YMAX));
+        //Ni[i] = vector< vector<double> >(YMAX, vector<double>(YMAX));
     }
     for (i=0; i < 2; i++)
     {
         u[i] = vector< vector<double> >(XMAX*64, vector<double>(YMAX));
+        //u[i] = vector< vector<double> >(XMAX, vector<double>(XMAX));
     }
 
 
@@ -178,6 +181,7 @@ int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > r
     uint64_t bit_to_add;
     uniform_real_distribution<double> rbit(0,1); //Used to add random bits
 
+    //Defino nueva probabilidad
     prob = 0.01;
 
     n_particles = 0; //Counter of particles
@@ -660,6 +664,7 @@ void measure(vector< vector<uint64_t> > cell[7], double ci[7][2], vector< vector
     for (i=0; i < 2; i++)
     {
         flux[i] = vector< vector<double> >(XMAX*64, vector<double>(YMAX));
+        //flux[i] = vector< vector<double> >(YMAX, vector<double>(YMAX));
     }
 
     //Init sums for the mean data
@@ -724,7 +729,8 @@ void measure(vector< vector<uint64_t> > cell[7], double ci[7][2], vector< vector
     //Finish the mean dividing by the number of cells
     for (i=0; i < NMEANDATA; i++)
     {
-            mean_data[i] /= (XMAX*64)*YMAX;
+            //mean_data[i] /= (XMAX*64)*YMAX;
+            mean_data[i] /= (YMAX)*YMAX;
     }
 
     return;
