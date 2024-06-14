@@ -182,7 +182,7 @@ int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > r
     uniform_real_distribution<double> rbit(0,1); //Used to add random bits
 
     //Defino nueva probabilidad
-    prob = 0.005;
+    //prob = 0.005;
 
     n_particles = 0; //Counter of particles
     for (i=0; i < XMAX; i++)
