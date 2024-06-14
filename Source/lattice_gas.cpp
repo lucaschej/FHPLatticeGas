@@ -596,7 +596,8 @@ void writeData(vector< vector<uint64_t> > cell[7], string filename)
                 b = bit_at(particle, k);
                 if (b == 1)
                 {
-                    xpos = k + 64 * i; //Get every position inside the bit array
+                    xpos = k + 1 * i; //Get every position inside the bit array
+                    //xpos = k + 64 * i; //Get every position inside the bit array
                     output << 0.5 * j * L + xpos * L << " " << j * L * 0.8660254038 << endl; //Write the output
                 }
             }
