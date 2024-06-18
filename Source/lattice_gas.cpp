@@ -1,4 +1,5 @@
 #include "config.h"
+#include "initialize.h"
 
 #include<iostream>
 #include<cstdlib>
@@ -8,10 +9,6 @@
 #include<vector>
 #include<string>
 #include<chrono>
-
-//#define XMAX 25
-//#define YMAX 25//XMAX*64
-//#define NMEANDATA 10
 
 using namespace std;
 
@@ -66,9 +63,6 @@ int main(void)
     vector< vector<uint64_t> > result_cell[7];
     vector< vector<uint64_t> > nsbit (XMAX, vector<uint64_t>(YMAX));
 
-    //int n_its = 10; //Number of iterations;
-    //double fraction_its = 0.3; //Fraction of iterations assumed before equilibrium
-
     //Velocities for the grid above
     double ci[7][2] =
     {
@@ -116,6 +110,8 @@ int main(void)
     mt19937 gen (chrono::high_resolution_clock::now().time_since_epoch().count());
 
     k = 0.2;
+
+    N_particles = initialize(cell, result_cell, nsbit, gen, k);
 
     //for (k=0.01; k < 0.5; k += 0.02)
     //{
@@ -174,6 +170,9 @@ int main(void)
     return 0;
 }
 
+
+
+/*
 //Initializces the cells with random speed
 int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > result_cell[7], vector< vector<uint64_t> >& nsbit, mt19937 generator, double prob)
 {
@@ -210,6 +209,7 @@ int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > r
     }
     return n_particles;
 }
+*/
 
 //Does the FHP-I model collision: double and triple particles.
 //Uses the data in the cell, computes collisions and stores it in result_cell.
