@@ -11,3 +11,9 @@ Also, the code is well-structured and fully commented, so it's easy to modify it
 
 FHP-III implementation differs from the one given in the book by Wolf-Gladrow (but it gives correct results). 
 
+## 06182024 version:
+- Added ./Allclean.sh
+- Added ./Allrun.sh
+- Added plotter.py
+- Added initialize.cpp routine
+- Added config.h 
