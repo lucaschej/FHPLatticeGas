@@ -11,17 +11,16 @@ protected_file_1="lattice_gas.cpp"
 protected_file_2="config.h"
 protected_file_3="initialize.h"
 protected_file_4="initialize.cpp"
-protected_file_5="initialize.h"
-protected_file_6="Allrun.sh"
-protected_file_7="Allclean.sh"
-protected_file_8="plotter.py"
+protected_file_5="Allrun.sh"
+protected_file_6="Allclean.sh"
+protected_file_7="plotter.py"
 
 # Navegar a la carpeta donde se encuentra el script
 cd "$script_dir"
 
 # Borrar todos los archivos excepto el script y el archivo protegido
 for file in *; do
-  if [[ "$file" != "$script_name" && "$file" != "$protected_file_1" && "$file" != "$protected_file_2" && "$file" != "$protected_file_3" && "$file" != "$protected_file_4" && "$file" != "$protected_file_5" && "$file" != "$protected_file_6" && "$file" != "$protected_file_7" && "$file" != "$protected_file_8" ]]; then
+  if [[ "$file" != "$script_name" && "$file" != "$protected_file_1" && "$file" != "$protected_file_2" && "$file" != "$protected_file_3" && "$file" != "$protected_file_4" && "$file" != "$protected_file_5" && "$file" != "$protected_file_6" && "$file" != "$protected_file_7" ]]; then
     rm -f "$file"
   fi
 done

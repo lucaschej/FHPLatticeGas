@@ -111,8 +111,6 @@ int main(void)
 
     k = 0.2;
 
-    N_particles = initialize(cell, result_cell, nsbit, gen, k);
-
     //for (k=0.01; k < 0.5; k += 0.02)
     //{
         //Init the grid and get all the particles
@@ -170,46 +168,6 @@ int main(void)
     return 0;
 }
 
-
-
-/*
-//Initializces the cells with random speed
-int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > result_cell[7], vector< vector<uint64_t> >& nsbit, mt19937 generator, double prob)
-{
-    int i,j,k,b; //Counters
-    int n_particles;
-    uint64_t aux_bit; //Auxiliar variables
-    uint64_t bit_to_add;
-    uniform_real_distribution<double> rbit(0,1); //Used to add random bits
-
-    //Defino nueva probabilidad
-    //prob = 0.005;
-
-    n_particles = 0; //Counter of particles
-    for (i=0; i < XMAX; i++)
-    {
-        for (j=0; j < YMAX; j++)
-        {
-            for (k=0; k < 7; k++)
-            {
-                uint64_t aux_bit = 0; //Init
-                //Get a random number with a p% of ones
-                for (b=0; b < 64; b++)
-                {
-                    bit_to_add = rbit(generator) <= prob ? uint64_t(1) : uint64_t(0);
-                    aux_bit = bit_to_add ^ (aux_bit << 1); //Add the one or zero
-                }
-                cell[k][i][j] = aux_bit; //Add to the cell
-                n_particles += __builtin_popcount(cell[k][i][j]); //Count number of ones
-                result_cell[k][i][j] = 0;
-            }
-
-            nsbit[i][j] = ~uint64_t(0); //Non-solid = Non-wall -> 1 in the fluid
-        }
-    }
-    return n_particles;
-}
-*/
 
 //Does the FHP-I model collision: double and triple particles.
 //Uses the data in the cell, computes collisions and stores it in result_cell.

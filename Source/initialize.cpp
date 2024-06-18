@@ -16,6 +16,8 @@ int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > r
     uint64_t bit_to_add;
     uniform_real_distribution<double> rbit(0, 1); // Se usa para agregar bits aleatorios
 
+    prob = 0.005;
+
     n_particles = 0; // Contador de partículas
     for (i = 0; i < XMAX; i++)
     {
