@@ -1,3 +1,5 @@
+#include "config.h"
+
 #include<iostream>
 #include<cstdlib>
 #include<random>
@@ -7,9 +9,9 @@
 #include<string>
 #include<chrono>
 
-#define XMAX 25
-#define YMAX 25//XMAX*64
-#define NMEANDATA 10
+//#define XMAX 25
+//#define YMAX 25//XMAX*64
+//#define NMEANDATA 10
 
 using namespace std;
 
@@ -64,8 +66,8 @@ int main(void)
     vector< vector<uint64_t> > result_cell[7];
     vector< vector<uint64_t> > nsbit (XMAX, vector<uint64_t>(YMAX));
 
-    int n_its = 10; //Number of iterations;
-    double fraction_its = 0.3; //Fraction of iterations assumed before equilibrium
+    //int n_its = 10; //Number of iterations;
+    //double fraction_its = 0.3; //Fraction of iterations assumed before equilibrium
 
     //Velocities for the grid above
     double ci[7][2] =
