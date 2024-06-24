@@ -25,6 +25,10 @@ protected_files=(
     "propagation.h"
     "measure.h"
     "measure.cpp"
+    "get_results.h"
+    "get_results.cpp"
+    "promediate.cpp"
+    "promediate.h"
 )
 
 # Navegar a la carpeta donde se encuentra el script

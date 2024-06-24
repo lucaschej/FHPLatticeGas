@@ -5,6 +5,8 @@
 #include "collisionFHP_III.h"
 #include "propagation.h"
 #include "measure.h"
+#include "get_results.h"
+#include "promediate.h"
 
 #include<iostream>
 #include<cstdlib>
@@ -17,14 +19,6 @@
 
 using namespace std;
 
-//Inits the variables
-int initialize(vector< vector<uint64_t> > cell[7],  vector< vector<uint64_t> > result_cell[7], vector< vector<uint64_t> >& nsbit, mt19937 generator,  double prob);
-
-//Get the results for g(d), nu(d), etc for the models
-void get_results_FHPI(double rho, double& d, double& cs, double& gd, double& nud, double& etad, double& re);
-void get_results_FHPII(double rho, double& d, double& cs, double& gd, double& nud, double& etad, double& re);
-void get_results_FHPIII(double rho, double& d, double& cs, double& gd, double& nud, double& etad, double& re);
-
 //Get the k-th bit of n
 int bit_at(uint64_t n, int k);
 
@@ -33,10 +27,6 @@ void writeData(vector< vector<uint64_t> > cell[7], string filename);
 void writeGrid();
 void writeData(vector<double> data_to_write[7], int N, string filename);
 void writeResults(double rho, string filename);
-
-//Measures the most important values of the distribution
-//void measure(vector< vector<uint64_t> > cell[7], double ci[7][2], vector< vector<double> > Ni[7], vector< vector<double> >&  rho, vector< vector<double> >  u[2], double mean_data[NMEANDATA]);
-void promediate(double mean_data[NMEANDATA], vector<double> ni_to_write[7], vector<double> u_to_write[2], double& rho_eq, double u_eq[2], double Ni_eq[7], int fraction_its, int n_its);
 
 //Gives the equilibrium values for the mean occupation numbers
 void equilibrium_ni(double rho, double ci[7][2], double u[2], double ni[7], double nieq[7]);
@@ -300,73 +290,6 @@ void writeResults(double rho, string filename)
 int bit_at(uint64_t n, int k)
 {
     return (((n<<k) & ((uint64_t(1)<<63))) >>63);
-}
-
-//Promediate over measured values in the main loop to get stable data
-void promediate(double mean_data[NMEANDATA], vector<double> ni_to_write[7], vector<double> u_to_write[2], double& rho_eq, double u_eq[2], double Ni_eq[7], int fraction_its, int n_its)
-{
-    int i,j;
-
-    //Promediate in the equilibrium
-    if (i >= fraction_its * n_its)
-    {
-        for (j=0; j < 7; j++)
-        {
-            Ni_eq[j] += mean_data[j];
-        }
-        rho_eq += mean_data[7];
-        u_eq[0] += mean_data[8];
-        u_eq[1] += mean_data[9];
-    }
-
-    //Division by the number of particles will be done after the main loop, to save time
-
-    //Add the ni and u measured values to do a graph
-    for (j=0; j < 7; j++)
-    {
-        ni_to_write[j].push_back(mean_data[j]);
-    }
-    u_to_write[0].push_back(mean_data[8]);
-    u_to_write[1].push_back(mean_data[9]);
-
-    return;
-}
-
-//Writes the values on the variables given by reference.
-void get_results_FHPI(double rho, double& d, double& cs, double& gd, double& nud, double& etad, double& re)
-{
-    d = rho / 6.0;
-    cs = 1.0/ sqrt(2.0);
-    gd = ((1.0 - 2.0 * d) / (1.0 - d)) / 2.0;
-    nud = (1.0 / (d *  pow(1.0 - d, 3.0))) / 12.0 - 1.0/8.0;
-    etad = 0.0;
-    re = cs * gd / nud;
-
-    return;
-}
-
-void get_results_FHPII(double rho, double& d, double& cs, double& gd, double& nud, double& etad, double& re)
-{
-    d = rho / 7.0;
-    cs = sqrt(3.0 / 7.0);
-    gd = 7.0*(1.0-2.0*d)/(12.0 * (1.0 - d));
-    nud = 1.0 / (28.0 * d * pow(1.0 - d, 3.0) * (1.0 - 4.0 * d / 7.0)) - 1.0/8.0;
-    etad = 1.0 / (98.0 * d * pow(1.0 - d, 4.0)) - 1.0/28.0;
-    re = cs * gd / nud;
-
-    return;
-}
-
-void get_results_FHPIII(double rho, double& d, double& cs, double& gd, double& nud, double& etad, double& re)
-{
-    d = rho / 7.0;
-    cs = sqrt(3.0 / 7.0);
-    gd = 7.0*(1.0-2.0*d)/(12.0 * (1.0 - d));
-    nud = 1.0 / (28.0 * d * (1.0 - d) * (1.0 - 8.0 * d * (1.0 - d)/ 7.0)) - 1.0/8.0;
-    etad = 1.0 / (98.0 * d * (1.0 - d) * (1.0 - 2.0 * d * (1.0 - d))) - 1.0/28.0;
-    re = cs * gd / nud;
-
-    return;
 }
 
 void equilibrium_ni(double rho, double ci[7][2], double u[2], double ni[7], double nieq[7])
