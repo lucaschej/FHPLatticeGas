@@ -6,22 +6,33 @@ script_name=$(basename "$0")
 # Carpeta en la que se encuentra el script
 script_dir=$(dirname "$0")
 
-# Nombre del archivo que no se debe borrar
-protected_file_1="lattice_gas.cpp"
-protected_file_2="config.h"
-protected_file_3="initialize.h"
-protected_file_4="initialize.cpp"
-protected_file_5="Allrun.sh"
-protected_file_6="Allclean.sh"
-protected_file_7="plotter.py"
+# Archivos protegidos que no se deben borrar
+protected_files=(
+    "lattice_gas.cpp"
+    "config.h"
+    "initialize.h"
+    "initialize.cpp"
+    "Allrun.sh"
+    "Allclean.sh"
+    "plotter.py"
+    "collisionFHP_I.cpp"
+    "collisionFHP_I.h"
+    "collisionFHP_II.cpp"
+    "collisionFHP_II.h"
+    "collisionFHP_III.cpp"
+    "collisionFHP_III.h"
+    "propagation.cpp"
+    "propagation.h"
+    "measure.h"
+    "measure.cpp"
+)
 
 # Navegar a la carpeta donde se encuentra el script
 cd "$script_dir"
 
-# Borrar todos los archivos excepto el script y el archivo protegido
+# Borrar todos los archivos excepto el script y los archivos protegidos
 for file in *; do
-  if [[ "$file" != "$script_name" && "$file" != "$protected_file_1" && "$file" != "$protected_file_2" && "$file" != "$protected_file_3" && "$file" != "$protected_file_4" && "$file" != "$protected_file_5" && "$file" != "$protected_file_6" && "$file" != "$protected_file_7" ]]; then
-    rm -f "$file"
-  fi
+    if [[ "$file" != "$script_name" && ! " ${protected_files[@]} " =~ " $file " ]]; then
+        rm -f "$file"
+    fi
 done
-
