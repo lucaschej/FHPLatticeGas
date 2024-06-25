@@ -1,9 +1,6 @@
 // include.cpp
 #include "measure.h"
-
-//Periodic boundary conditions
-int periodic_bc(int k, int maxk);
-int periodic_bc(int b, int maxb, int& x);
+#include "periodic_bc.h"
 
 //Get the k-th bit of n
 int bit_at(uint64_t n, int k);

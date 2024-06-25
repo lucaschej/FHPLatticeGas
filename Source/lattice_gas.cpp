@@ -7,6 +7,7 @@
 #include "measure.h"
 #include "get_results.h"
 #include "promediate.h"
+#include "periodic_bc.h"
 
 #include<iostream>
 #include<cstdlib>
@@ -30,7 +31,6 @@ void writeResults(double rho, string filename);
 
 //Gives the equilibrium values for the mean occupation numbers
 void equilibrium_ni(double rho, double ci[7][2], double u[2], double ni[7], double nieq[7]);
-
 
 int main(void)
 {
@@ -149,42 +149,6 @@ int main(void)
     //}
 
     return 0;
-}
-
-//Computes periodic boundary conditions.
-int periodic_bc(int k, int maxk)
-{
-    if (k < 0)
-    {
-        return maxk-1;
-    }
-    else if(k == maxk)
-    {
-        return 0;
-    }
-    else
-    {
-        return k;
-    }
-}
-
-//Periodic conditions for bit-by-bit checking
-int periodic_bc(int b, int maxb, int& x)
-{
-    if (b < 0)
-    {
-        x = periodic_bc(x-1, XMAX); //Goes backward on x
-        return maxb-1; //Get last bit
-    }
-    else if(b == maxb)
-    {
-        x = periodic_bc(x+1, XMAX); //Goes forward on x
-        return 0; //Get first bit
-    }
-    else
-    {
-        return b;
-    }
 }
 
 void writeGrid()

@@ -1,9 +1,6 @@
 // propagation.cpp
 #include "propagation.h"
-
-//Periodic boundary conditions
-int periodic_bc(int k, int maxk);
-int periodic_bc(int b, int maxb, int& x);
+#include "periodic_bc.h"
 
 //Propagation of particles. Result is exported again to cell from the result_cell
 //computed in collisions.

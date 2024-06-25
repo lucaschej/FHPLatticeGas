@@ -29,6 +29,8 @@ protected_files=(
     "get_results.cpp"
     "promediate.cpp"
     "promediate.h"
+    "periodic_bc.h"
+    "periodic_bc.cpp"
 )
 
 # Navegar a la carpeta donde se encuentra el script
