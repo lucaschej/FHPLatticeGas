@@ -1,3 +1,11 @@
+/*--------------------------------*- C++ -*-----------------------------------------------------*\
+                                |
+  Frisch–Hasslacher–Pomeau      |       Author: VictorSeven
+        F - H - P               |       Website: https://github.com/VictorSeven/FHPLatticeGas.git
+    Lattice Gas Model           |       Year: 2024
+                                |
+\*-----------------------------------------------------------------------------------------------*/
+
 #include "config.h"
 #include "initialize.h"
 #include "collisionFHP_I.h"
@@ -17,6 +25,8 @@
 #include<vector>
 #include<string>
 #include<chrono>
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *//
 
 using namespace std;
 
